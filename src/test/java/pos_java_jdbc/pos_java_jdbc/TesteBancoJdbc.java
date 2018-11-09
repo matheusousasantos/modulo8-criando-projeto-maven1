@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import dao.UserPostegresDAO;
+import model.Telefoneuser;
 import model.Userpostegres;
 
 public class TesteBancoJdbc {
@@ -78,6 +79,20 @@ public class TesteBancoJdbc {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testeInsertTelefone() {
+		
+		Telefoneuser obj = new Telefoneuser();
+		obj.setNumero("9894989889");
+		obj.setTipo("casa");
+		obj.setUserPostegres(2L);
+		
+		UserPostegresDAO dao = new UserPostegresDAO();
+		
+		dao.salvarTelefone(obj);
+		
 	}
 
 }

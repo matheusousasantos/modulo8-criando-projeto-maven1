@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexaojdbc.SingleConnection;
+import model.Telefoneuser;
 import model.Userpostegres;
 
 public class UserPostegresDAO {
@@ -39,6 +40,33 @@ public class UserPostegresDAO {
 			}
 			e.printStackTrace();
 		}
+	}
+	
+	public void salvarTelefone(Telefoneuser obj) {//Método será usando pra salvar o telefone..
+		
+		try {
+			
+			String sql = "INSERT INTO telefoneuser(numero, tipo, userpessoa) VALUES (?, ?, ?)";
+			
+			PreparedStatement pst = connection.prepareStatement(sql);
+			
+			pst.setString(1, obj.getNumero());
+			pst.setString(2,obj.getTipo());
+			pst.setLong(3, obj.getUserPostegres());
+			
+			pst.execute();
+			connection.commit();
+			
+		}catch(Exception e) {
+			try {
+				e.printStackTrace();
+				connection.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
 	}
 	
 	public List<Userpostegres> listar() throws Exception{
