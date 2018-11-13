@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexaojdbc.SingleConnection;
+import model.BeanUserFone;
 import model.Telefoneuser;
 import model.Userpostegres;
 
@@ -109,6 +110,36 @@ public class UserPostegresDAO {
 		
 		return retorno;
 
+	}
+	
+	public List<BeanUserFone>listarUserFone(Long id){
+		
+		List<BeanUserFone> objs = new ArrayList<BeanUserFone>();
+		
+		String sql = "SELECT nome, numero, email FROM telefoneuser AS t ";
+		sql +="INNER JOIN userpostegres AS u ";
+		sql +="ON u.id = t.userpessoa";
+		sql +=" WHERE u.id =" + id; // Retorna uma pessoa com seus talefones.
+		
+		try {
+			
+			PreparedStatement smt = connection.prepareStatement(sql);
+			ResultSet rs = smt.executeQuery();
+			
+			while(rs.next()) {
+				BeanUserFone obj = new BeanUserFone();
+				obj.setNome(rs.getString("nome"));
+				obj.setEmail(rs.getString("email"));
+				obj.setNumero(rs.getString("numero"));
+				objs.add(obj);
+			}
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return objs;
 	}
 	
 	public void atualizar(Userpostegres obj) {

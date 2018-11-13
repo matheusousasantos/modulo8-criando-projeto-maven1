@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import dao.UserPostegresDAO;
+import model.BeanUserFone;
 import model.Telefoneuser;
 import model.Userpostegres;
 
@@ -92,6 +93,19 @@ public class TesteBancoJdbc {
 		UserPostegresDAO dao = new UserPostegresDAO();
 		
 		dao.salvarTelefone(obj);
+		
+	}
+	
+	@Test
+	public void testeCarregarFonesUser() {
+		UserPostegresDAO dao = new UserPostegresDAO();
+		
+		List<BeanUserFone> objs  = dao.listarUserFone(1L);
+		
+		for(BeanUserFone x : objs) {
+			System.out.println(x.toString());
+			System.out.println("--------------------");
+		}
 		
 	}
 
