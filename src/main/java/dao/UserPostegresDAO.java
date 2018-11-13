@@ -185,4 +185,27 @@ public class UserPostegresDAO {
 		}
 	}
 	
+	public void deleteFonesPorUser(Long idUser) {//Deletando o usuario e telefone.
+		
+		try {
+		String sqlFone = "DELETE FROM telefoneuser WHERE userpessoa =" + idUser;
+		String sqlUser = "DELETE FROM userpostegres WHERE id =" + idUser;
+		PreparedStatement pst = connection.prepareStatement(sqlFone);
+		pst.executeUpdate();
+		connection.commit();
+		
+		pst = connection.prepareStatement(sqlUser);
+		pst.executeUpdate();
+		connection.commit();
+		
+		}catch(Exception e) {
+			try {
+				connection.rollback();
+				e.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	
 }

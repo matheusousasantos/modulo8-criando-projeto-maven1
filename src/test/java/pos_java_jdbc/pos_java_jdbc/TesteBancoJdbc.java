@@ -108,5 +108,13 @@ public class TesteBancoJdbc {
 		}
 		
 	}
+	
+	@Test
+	public void deleteFonesPorUser() {
+		
+		UserPostegresDAO dao = new UserPostegresDAO();
+		dao.deleteFonesPorUser(1L);
+		
+	}
 
 }
